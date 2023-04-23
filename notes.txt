@@ -1,0 +1,15 @@
+sudo systemctl stop metro-display
+sudo systemctl start metro-display
+
+curl -s localhost:5000/state | jq .
+
+curl --location --request PUT 'localhost:5000/station/name' --header 'Accept: application/json' --header 'Content-Type: application/json' --data-raw '{
+        "stationName": "lenfant",
+        "directionOf": "franconia"
+}'
+
+Linux:
+curl --location --request PUT '192.168.0.21:5000/station/name' --header 'Accept: application/json' --header 'Content-Type: application/json' --data-raw '{"stationName": "columbia","directionOf": "branch"}'
+
+Windows:
+curl --location --request PUT "192.168.0.21:5000/station/name" --header "Accept: application/json" --header "Content-Type: application/json" --data-raw "{\"stationName\": \"columbia\",\"directionOf\": \"branch\"}"
