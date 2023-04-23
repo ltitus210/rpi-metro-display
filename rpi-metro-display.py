@@ -56,7 +56,7 @@ def show_train_times(api_key, font_file, canvas, station_code, direction, prev_l
         dests != prev_dests or \
         times != prev_times:
         force_update = True
-    elif force_update: 
+    elif force_update:
         # Needed after an incident is displayed and the train times haven't changed
         # Realistically I could do without this condition because it's only a log
         # but to me it's nice to have
@@ -105,7 +105,7 @@ def run_display(api_key, station_code_receiver, direction_receiver, font_file):
             incidents_check_count = 0
 
         prev_lines, prev_cars, prev_dests, prev_times = show_train_times(api_key, font_file, canvas, station_code, direction, prev_lines, prev_cars, prev_dests, prev_times, force_update)
-        
+
         time.sleep(5)
         incidents_check_count += 1
 
@@ -431,7 +431,7 @@ def change_station_by_name():
         return jsonify(**bad_name), 400
     else:
         station_name = sanitize_input(station_name)
-    
+
     if station_lines != None:
         if not isinstance(station_lines, list):
             bad_lines = {
@@ -467,7 +467,7 @@ def change_station_by_name():
             }
             return jsonify(**bad_station), 400
         terminal_station = sanitize_input(terminal_station)
-    
+
     # Look inside cached stations file for the station name
     # and save the associated code
     with open(stations_file.value) as sf:
@@ -578,4 +578,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
