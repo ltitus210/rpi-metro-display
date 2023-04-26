@@ -190,7 +190,7 @@ def draw_incident(canvas, font_file, message):
     if "scheduled maintenance" in message or "scheduled track work" in message:
         graphics.DrawText(canvas, font, 1, 15, red_color, "SCHEDULED")
         graphics.DrawText(canvas, font, 1, 23, red_color, "TRACK WORK")
-        logging.info("Drawing scheduled track worked")
+        logging.info("Drawing scheduled track work")
     else:
         logging.info("Drawing service advisory")
         service = "SERVICE"
