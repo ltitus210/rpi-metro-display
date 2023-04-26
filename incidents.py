@@ -130,7 +130,7 @@ def draw_message(canvas, message, font_file):
 
     title_lines = []
     # Shouldn't need to worry about a word
-    # longer than 21 for now since Silver/Blue/Orange 
+    # longer than 21 for now since Silver/Blue/Orange
     # is the max # of metro lines per alert assuming all lines
     # is all lines
     if title != '':
@@ -175,7 +175,7 @@ def draw_incident(canvas, font_file, message):
     green_color = graphics.Color(50,150,0)
 
     canvas.Clear()
-    
+
     for y in range(0, 8):
         for x in range(0, 32):
             x0 = x * 4
@@ -190,7 +190,7 @@ def draw_incident(canvas, font_file, message):
     if "scheduled maintenance" in message or "scheduled track work" in message:
         graphics.DrawText(canvas, font, 1, 15, red_color, "SCHEDULED")
         graphics.DrawText(canvas, font, 1, 23, red_color, "TRACK WORK")
-        logging.info("Drawing scheduled track workd")
+        logging.info("Drawing scheduled track worked")
     else:
         logging.info("Drawing service advisory")
         service = "SERVICE"
@@ -226,4 +226,3 @@ if __name__ == '__main__':
     messages = get_incidents(['SV', 'OR', 'GR'], api_key)
     for message in messages:
         draw_incident(matrix, message, font_file)
-
