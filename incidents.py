@@ -225,6 +225,6 @@ if __name__ == '__main__':
     font_file = sys.argv[2]
 
     matrix = init_matrix()
-    messages = get_incidents(['SV', 'OR', 'GR'], api_key)
+    messages = get_incidents(['GR', 'YL'], api_key)
     for message in messages:
         draw_incident(matrix, message, font_file)
