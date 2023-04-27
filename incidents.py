@@ -161,7 +161,7 @@ def draw_message(canvas, message, font_file):
         canvas.Clear()
 
 
-def draw_incident(canvas, font_file, message):
+def draw_incident(canvas, message, font_file):
     logging.info("Got to draw incident")
     height_delta = 8
     width_delta = 6

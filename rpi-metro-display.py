@@ -101,7 +101,7 @@ def run_display(api_key, station_code_receiver, direction_receiver, font_file):
             incidents = get_incidents(line_codes, api_key)
             for incident in incidents:
                 logging.info("Calling draw_incident for: {}".format(incident))
-                draw_incident(canvas, font_file, incident)
+                draw_incident(canvas, incident, font_file)
             incidents_check_count = 0
 
         prev_lines, prev_cars, prev_dests, prev_times = show_train_times(api_key, font_file, canvas, station_code, direction, prev_lines, prev_cars, prev_dests, prev_times, force_update)
