@@ -28,6 +28,7 @@ def init_matrix():
     options.pwm_bits = 3
     options.pwm_lsb_nanoseconds = 300
     options.gpio_slowdown = 2
+    options.pixel_mapper_config = "Rotate:180"
     return RGBMatrix(options = options)
 
 def get_incidents(lines_requested, api_key):
