@@ -188,17 +188,17 @@ def draw_incident(canvas, font_file, message):
     logging.info("Got past drawing squares")
 
     if "scheduled maintenance" in message or "scheduled track work" in message:
-        scheduled = "SCHEDULED"
-        track_work = "TRACK WORK"
-        graphics.DrawText(canvas, font, compute_offset(scheduled), 15, red_color, scheduled)
-        graphics.DrawText(canvas, font, compute_offset(track_work), 23, red_color, track_work)
-        logging.info("Drawing scheduled track work")
+        line1   = "SCHEDULED"
+        line2   = "TRACK WORK"
+        log_msg = "Drawing scheduled track work"
     else:
-        logging.info("Drawing service advisory")
-        service = "SERVICE"
-        advisory = "ADVISORY"
-        graphics.DrawText(canvas, font, compute_offset(service), 15, red_color, service)
-        graphics.DrawText(canvas, font, compute_offset(advisory), 23, red_color, advisory)
+        line1   = "SERVICE"
+        line2   = "ADVISORY"
+        log_msg = "Drawing service advisory"
+
+    logging.info(log_msg)
+    graphics.DrawText(canvas, font, compute_offset(line1), 15, red_color, line1)
+    graphics.DrawText(canvas, font, compute_offset(line2), 23, red_color, line2)
 
     for y in range(24, 32):
         for x in range(0, 32):
