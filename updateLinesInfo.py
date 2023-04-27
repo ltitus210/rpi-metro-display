@@ -1,5 +1,4 @@
 # Get DC metrorail lines JSON response and write to a file
-# Display WMATA Metrorail times on a dot-matrix display
 # Copyright (C) 2020  Kenneth Schneider
 
 # This program is free software; you can redistribute it and/or modify
@@ -44,7 +43,6 @@ lines_json = resp.json()
 # and in all other places in sync.
 for line in lines_json['Lines']:
     line['DisplayName'] = sanitize_input(line['DisplayName'])
-
 
 lines_file = open(output_dir, "w")
 lines_file.write(json.dumps(lines_json))
