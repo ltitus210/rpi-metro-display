@@ -18,6 +18,7 @@ from rgbmatrix import RGBMatrix, RGBMatrixOptions, graphics
 from flask import Flask, jsonify, request, current_app
 from multiprocessing import Process, Pipe
 from multiprocessing.sharedctypes import Value
+import multiprocessing
 import ctypes
 import traceback
 import time
@@ -34,6 +35,7 @@ app = Flask(__name__)
 # Global shared variables
 stations_file = None
 lines_file = None
+halt_displays = multiprocessing.Event()
 
 def exception_hook(exctype, value, tb):
     logging.error("Uncaught exception!")
@@ -87,6 +89,11 @@ def run_display(api_key, station_code_receiver, direction_receiver, font_file):
     draw_display(canvas, font_file, [], [], [], [])
 
     while True:
+        while halt_displays.is_set():
+            logging.info("Display is paused")
+            canvas.Clear()
+            while halt_displays.is_set():
+                time.sleep(5)
         force_update = False
         if station_code_receiver.poll():
             station_code = station_code_receiver.recv()
@@ -542,10 +549,32 @@ def get_state():
 
     return respond_success(station)
 
+@app.route('/halt')
+def halt_display():
+    halt_displays.set()
+    logging.info("Halting display")
+
+    success_json = {
+        "status": "success"
+    }
+
+    return jsonify(**success_json), 202
+
+@app.route('/restart')
+def restart_display():
+    halt_displays.clear()
+    logging.info("Restarting display")
+
+    success_json = {
+        "status": "success"
+    }
+
+    return jsonify(**success_json), 202
 
 def main():
     global stations_file
     global lines_file
+    global halt_displays
 
     if len(sys.argv) != 8:
         print("Usage rpi-metro-display <log_file> <api_key> <initial_station_code> <initial_direction_code> <font_file> <lines_file> <stations_file>")
